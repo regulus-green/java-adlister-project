@@ -24,31 +24,39 @@ public class RegisterServlet extends HttpServlet {
         String passwordConfirmation = request.getParameter("confirm_password");
 
         // validate input
+
         boolean inputHasErrors = false;
         if (username.isEmpty()) {
+//            checks to see if user entered in a username if not, sends error message.
             request.getSession().setAttribute("error", "Please enter a username.");
             inputHasErrors = true;
         } else if (DaoFactory.getUsersDao().findByUsername(username) != null) {
+            //            checks to see if username entered is in use. if it is, sends error message.
             request.setAttribute("userError", "That user name is already in use");
             inputHasErrors = true;
         }
         if (email.isEmpty()) {
+//            checks to see if user entered an email address. if not an error message is sent.
             request.getSession().setAttribute("error", "Please enter an email.");
             inputHasErrors = true;
         }
         if (password.isEmpty()) {
+//            checks to see if user entered a password. if not an error message is sent.
             request.getSession().setAttribute("error", "Please enter in a password for your account.");
             inputHasErrors = true;
         } else if (!password.equals(passwordConfirmation)) {
+//            makes sure that passwords match. if not an error message is sent.
             request.getSession().setAttribute("error", "Your passwords do not match. Please re-enter.");
             inputHasErrors = true;
         }
+
 
 
         if (inputHasErrors) {
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             try {
+//               if there are errors, user is sent back to register and info is not submitted.
                 request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             } catch (ServletException e) {
                 e.printStackTrace();
@@ -62,6 +70,8 @@ public class RegisterServlet extends HttpServlet {
 
 
 
+
         }
+
     }
 }

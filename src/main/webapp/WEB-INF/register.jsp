@@ -28,6 +28,7 @@
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>
+<%--        tag where error message will be displayed--%>
         <p>${error}</p>
     </div>
 </body>
