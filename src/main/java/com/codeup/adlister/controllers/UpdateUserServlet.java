@@ -1,3 +1,5 @@
+// updateUserServlet
+
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
@@ -29,35 +31,24 @@ public class UpdateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id = Long.parseLong(req.getParameter("id"));
-//        String username = req.getParameter("username");
-//        String email = req.getParameter("email");
-//        String password = req.getParameter("password");
 
-
-        User updatedUser = DaoFactory.getUsersDao().findById(id);
-//        System.out.println(id);
-//        System.out.println(updatedUser.getId());
-//        System.out.println(updatedUser.getUsername());
-//        System.out.println(updatedUser.getEmail());
+        User updatedUser = DaoFactory.getUsersDao().findById(id);//        System.out.println(updatedUser.getEmail());
         String username = req.getParameter("username");
         String email = req.getParameter("email");
-        String password = req.getParameter("password");
 
         updatedUser.setUsername(username);;
         updatedUser.setEmail(email);
-        updatedUser.setPassword(password);
 
         System.out.println(id);
         System.out.println(username);
         System.out.println(email);
-//        System.out.println(password);
+
 
         DaoFactory.getUsersDao().updateUser(updatedUser);
-//        System.out.println(updatedUser.getId());
-//        System.out.println(updatedUser.getUsername());
-//        System.out.println(updatedUser.getEmail());
+
 
         req.getSession().setAttribute("updatedUser", updatedUser);
+        req.getSession().invalidate();
         resp.sendRedirect("/profile");
     }
 

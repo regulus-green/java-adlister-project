@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name="UpdateAdServlet", urlPatterns = "/updateAd")
 public class UpdateAdServlet extends HttpServlet {
@@ -19,20 +20,38 @@ public class UpdateAdServlet extends HttpServlet {
             resp.sendRedirect("/login");
             return;
         }
+        long id = Long.parseLong(req.getParameter("id"));
+
+//        System.out.println(id);
+        req.setAttribute("id", id);
+        Ad updatedAd = DaoFactory.getAdsDao().findById(id);
+//        System.out.println(updatedAd);
+
+        req.setAttribute("updatedAd", updatedAd );
         req.getRequestDispatcher("/WEB-INF/ads/updateAd.jsp")
                 .forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
-        Ad ad = new Ad(
-                user.getId(),
-                req.getParameter("title"),
-                req.getParameter("description")
-        );
+        long id = Long.parseLong(req.getParameter("id"));
+        System.out.println(id);
+        Ad updated = DaoFactory.getAdsDao().findById(id);
+        System.out.println(updated.getTitle());
+        System.out.println(updated.getId());
+        String title = req.getParameter("title");
+        updated.setTitle(title);
 
-        DaoFactory.getAdsDao().updateAd(ad);
-        resp.sendRedirect("/ads");
+        String description = req.getParameter("description");
+        updated.setDescription(description);
+
+        System.out.println(updated.getId());
+        System.out.println(updated.getUserId());
+        System.out.println(updated.getTitle());
+        System.out.println(updated.getDescription());
+        DaoFactory.getAdsDao().updateAd(updated);
+        req.getSession().setAttribute("updatedAd", updated);
+
+        resp.sendRedirect("/profile");
     }
 }

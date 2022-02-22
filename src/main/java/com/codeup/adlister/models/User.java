@@ -1,3 +1,5 @@
+// modesl /user
+
 package com.codeup.adlister.models;
 
 import com.codeup.adlister.util.Password;
@@ -21,6 +23,11 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
     }
 
     public long getId() {

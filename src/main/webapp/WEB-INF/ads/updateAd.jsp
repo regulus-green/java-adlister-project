@@ -1,3 +1,5 @@
+// updatedAd.jsp
+
 <%--
   Created by IntelliJ IDEA.
   User: alfonsocarrillo
@@ -16,22 +18,26 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
-<h1>Ad</h1>
-<div>
-    <form action="/updateAd" method="post">
-        <label for="title">Title</label>
-        <input id="title" type="text" name="title">
-        <br>
-        <label for="description">Description</label>
-        <input id="description" type="text" name="description">
-        <br>
-        <div>
-            <button type="button">Submit</button>
-        </div>
-    </form>
+<div class="container">
+    <h1>Ad</h1>
+    <div>
+        <h1>${id}</h1>
+        <h1>${updatedAd.title}</h1>
+        <h2>${updatedAd.description}</h2>
+        <form action="/updateAd" method="post">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" value="${updatedAd.title}">
+            <br>
+            <label for="description">Description</label>
+            <input id="description" type="text" name="description" value="${updatedAd.description}">
+            <br>
+            <div>
+                <input id="update" type="hidden" name="id" value="${id}">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
-
 
 </body>
 </html>

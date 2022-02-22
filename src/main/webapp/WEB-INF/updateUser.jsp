@@ -27,9 +27,6 @@
             <label for="email">Email</label>
             <input id="email" type="text" name="email" value="${user.email}">
             <br>
-            <label for="password">Password</label>
-            <input id="password" type="text" name="password" value="password">
-            <br>
             <input id="update" type="hidden" name="id" value="${sessionScope.user.id}">
             <button>Submit</button>
 
