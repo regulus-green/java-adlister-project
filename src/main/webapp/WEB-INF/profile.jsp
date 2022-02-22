@@ -11,6 +11,12 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <form action="/updateUser" method="get">
+            <button id="id" value="${user.id}">Edit Profile</button>
+        </form>
+        <form action="/password" method="get">
+            <button id="password" value="${user.id}" >Change Password</button>
+        </form>
     </div>
 
     <div>

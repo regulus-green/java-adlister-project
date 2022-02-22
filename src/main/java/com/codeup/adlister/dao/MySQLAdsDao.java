@@ -115,6 +115,55 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+    // delete method - alfonso
+    public void deleteAd(long id ){
+        String deleteStmt = "DELETE FROM ads WHERE id = '" + id + "'";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(deleteStmt);
+            stmt.executeUpdate(deleteStmt);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad by id", e);
+        }
+    }
+    // update method - alfonso
+    public void updateAd(Ad ad){
+//        boolean rowUpdated;
+        String updateStmt = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(updateStmt);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
 
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating ad by id");
+        }
+//        System.out.println(rowUpdated);
+//        return rowUpdated;
+    }
+
+    public Ad findById(long id){
+        Ad ad = null;
+        String findStmt = "SELECT * FROM ads WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(findStmt);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            System.out.println(rs);
+            if(rs.next()){
+                ad = new Ad(
+                        rs.getLong("id"),
+                        rs.getLong("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description")
+                );
+            }
+        } catch (SQLException e){
+            throw new RuntimeException("Error finding ad by id");
+        }
+        System.out.println(ad);
+        return ad;
+    }
     }
 

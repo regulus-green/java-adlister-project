@@ -23,6 +23,21 @@
 <%--        <div class="individual-ad">--%>
             <h2>${adInfo.title}</h2>
             <p>${adInfo.description}</p>
+    <div>
+        <form action="/deleteAd" method="post">
+            <input id="delete" type="hidden" name="id" value="${adInfo.id}">
+            <button>Delete</button>
+        </form>
+    </div>
+    <div>
+        <form action="/updateAd" method="get">
+            <input id="update" type="hidden" name="id" value="${adInfo.id}">
+            <button>Update</button>
+        </form>
+    </div>
+
+
+
 <%--            <p>${adInfo.user_id}</p>--%>
 <%--        </div>--%>
 <%--    </c:forEach>--%>
