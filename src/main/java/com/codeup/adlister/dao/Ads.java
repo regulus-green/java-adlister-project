@@ -1,3 +1,4 @@
+//Reza
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
@@ -5,8 +6,21 @@ import com.codeup.adlister.models.Ad;
 import java.util.List;
 
 public interface Ads {
+    void editAd(String title, String description, String id);
+
     // get a list of all the ads
     List<Ad> all();
+
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+
+    // find an ad by title
+    List<Ad> findByTitle(String adTitle);
+
+    List<Ad> findAdByUsername(String username);
+
+    List<Ad> findAdByCategory(String category);
+
+    Ad findAdById(long adId);
+
 }

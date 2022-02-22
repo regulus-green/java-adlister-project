@@ -1,3 +1,4 @@
+//Reza
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.User;
@@ -51,8 +52,13 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public User findById(long userId) {
+        return null;
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
-        if (! rs.next()) {
+        if(! rs.next()) {
             return null;
         }
         return new User(
@@ -62,5 +68,4 @@ public class MySQLUsersDao implements Users {
             rs.getString("password")
         );
     }
-
 }
