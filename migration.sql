@@ -20,3 +20,9 @@ CREATE TABLE ads (
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
 );
+
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'codeup';
+
+GRANT ALL ON *.* TO 'mike'@'localhost';
+
+SELECT user, host FROM mysql.user;
